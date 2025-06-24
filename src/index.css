@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+body {
+  @apply text-[#3c3c2f] bg-[#e1d8cd]; /* ✅ fixed invalid hex colors */
+}
