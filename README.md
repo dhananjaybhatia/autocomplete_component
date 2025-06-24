@@ -13,6 +13,7 @@ A flexible and customizable AutoComplete component built with React. Supports bo
 - Works with both static and async data sources
 - Tailwind CSS styling (easily customizable)
 - In-memory caching with 30-second expiry (auto-refresh on stale data)
+- Matching text is highlighted using RegExp with global + case-insensitive flags
 
 ## Tech Stack
 
