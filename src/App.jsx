@@ -1,5 +1,7 @@
+import { useState } from "react";
 import AutoComplete from "./components/AutoComplete";
 import axios from "axios";
+import RecipeModal from "./components/RecipeModal";
 
 function App() {
   // const staticData = [
@@ -19,6 +21,8 @@ function App() {
   //   "Pomegranate",
   //   "Guava",
   // ];
+
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const fetchSuggestions = async (query) => {
     try {
@@ -43,11 +47,20 @@ function App() {
         fetchSuggestions={fetchSuggestions}
         dataKey={"name"}
         customLoading={<>Loading Recipes...</>}
-        onSelect={(res) => console.log(res)}
+        onSelect={(recipe) => {
+          console.log("🍽️ Selected recipe:", recipe);
+          setSelectedRecipe(recipe);
+        }}
         onChange={(input) => {}}
         onBlur={(e) => {}}
         onFocus={(e) => {}}
       />
+      {selectedRecipe && (
+        <RecipeModal
+          recipe={selectedRecipe}
+          onClose={() => setSelectedRecipe(null)}
+        />
+      )}
     </>
   );
 }

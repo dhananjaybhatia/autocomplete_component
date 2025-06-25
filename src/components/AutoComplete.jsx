@@ -49,7 +49,6 @@ const AutoComplete = ({
       if (fetchSuggestions) {
         results = await fetchSuggestions(query);
       }
-      console.log("Fetching from API...", query);
       setCache((prev) => ({
         ...prev,
         [query]: {
