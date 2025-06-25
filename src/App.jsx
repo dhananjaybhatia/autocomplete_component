@@ -2,6 +2,8 @@ import { useState } from "react";
 import AutoComplete from "./components/AutoComplete";
 import axios from "axios";
 import RecipeModal from "./components/RecipeModal";
+import RecipePrint from "./components/RecipetPrint";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
   // const staticData = [
@@ -23,6 +25,7 @@ function App() {
   // ];
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const navigate = useNavigate();
 
   const fetchSuggestions = async (query) => {
     try {
@@ -36,33 +39,41 @@ function App() {
   };
 
   return (
-    <>
-      <h1 className="text-7xl text-center mt-4 font-bold">
-        Autocomplete Component
-      </h1>
-      <AutoComplete
-        placeholder={"Enter Recipe Name..."}
-        label={"Search for Recipes"}
-        // staticData={staticData}
-        fetchSuggestions={fetchSuggestions}
-        dataKey={"name"}
-        customLoading={<>Loading Recipes...</>}
-        onSelect={(recipe) => {
-          console.log("🍽️ Selected recipe:", recipe);
-          setSelectedRecipe(recipe);
-        }}
-        onChange={(input) => {}}
-        onBlur={(e) => {}}
-        onFocus={(e) => {}}
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <h1 className="text-7xl text-center mt-4 font-bold">
+              Autocomplete Component
+            </h1>
+            <AutoComplete
+              placeholder={"Enter Recipe Name..."}
+              label={"Search for Recipes"}
+              fetchSuggestions={fetchSuggestions}
+              dataKey={"name"}
+              customLoading={<>Loading Recipes...</>}
+              onSelect={(recipe) => {
+                console.log("🍽️ Selected recipe:", recipe);
+                setSelectedRecipe(recipe);
+              }}
+            />
+            {selectedRecipe && (
+              <RecipeModal
+                recipe={selectedRecipe}
+                onClose={() => setSelectedRecipe(null)}
+                onDownload={() =>
+                  navigate("/recipe-print", {
+                    state: { recipe: selectedRecipe },
+                  })
+                }
+              />
+            )}
+          </>
+        }
       />
-      {selectedRecipe && (
-        <RecipeModal
-          recipe={selectedRecipe}
-          onClose={() => setSelectedRecipe(null)}
-        />
-      )}
-    </>
+      <Route path="/recipe-print" element={<RecipePrint />} />
+    </Routes>
   );
 }
-
 export default App;

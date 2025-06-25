@@ -1,4 +1,6 @@
-const RecipeModal = ({ recipe, onClose }) => {
+import { IoMdPrint } from "react-icons/io";
+
+const RecipeModal = ({ recipe, onClose, onDownload }) => {
   const {
     caloriesPerServing,
     cookTimeMinutes,
@@ -30,7 +32,15 @@ const RecipeModal = ({ recipe, onClose }) => {
         {/* Right Side - Recipe Info */}
         <div className="p-6 overflow-y-auto">
           <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold text-orange-600 mb-1">{name}</h1>
+            <div className="flex items-center gap-4">
+              <h1 className="text-3xl font-bold text-orange-600 mb-1">
+                {name}
+              </h1>
+              <div className="h-6 w-6 rounded-full bg-orange-400 flex items-center justify-center transform hover:scale-110 transition duration-200">
+                <IoMdPrint className="text-amber-100" onClick={onDownload} />
+              </div>
+            </div>
+
             <button
               onClick={onClose}
               className="right-6 text-xl transform hover:scale-110 transition duration-200 font-bold text-gray-600 hover:text-red-700"
