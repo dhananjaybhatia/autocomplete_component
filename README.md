@@ -14,9 +14,16 @@ A flexible and customizable AutoComplete component built with React. Supports bo
 - Tailwind CSS styling (easily customizable)
 - In-memory caching with 30-second expiry (auto-refresh on stale data)
 - Matching text is highlighted using RegExp with global + case-insensitive flags
+- Print Functionality is also added.
 
 ## Tech Stack
 
 - React
 - Axios
 - Tailwind CSS (for styling)
+
+Also Note - there is an issue with react-router that when you refresh it is unable to find the path and gives 404. I have 404.html component inside public where i have routed any 404 to homepage.
+
+I have hosted this small component on gitPages for users to use and see how it works: 
+
+https://dhananjaybhatia.github.io/autocomplete_component/
